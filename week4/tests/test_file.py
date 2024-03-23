@@ -29,12 +29,12 @@ def test_book_dog(monkeypatch, kennel_example):
     assert kennel_example.spaces_left() == 6
 
 
-def test_remove_dog():
+def test_remove_dog(monkeypatch, kennel_example):
     # Create a kennel company
-    pass
     # The kennel company will need to have at least 1 dog staying with it - facilitate this
-
+    kennel_example.enclosures[0].occupants.append(Dog("Barney", "Charlie", 4, "Newfie", "Big"))
     # Remove the dog
-
+    monkeypatch.setattr(Kennel_Company, 'is_authorised', lambda args: True)
+    kennel_example.remove_dog("Barney")
     # Check that the overall number of spaces left is correct after the removal
-
+    assert kennel_example.spaces_left() == 8
